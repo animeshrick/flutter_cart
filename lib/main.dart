@@ -12,8 +12,8 @@ import 'extension/hex_color.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final appDocumentDir = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDir.path);
+  // final appDocumentDir = await getApplicationDocumentsDirectory();
+  // Hive.init(appDocumentDir.path);
 
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
@@ -32,29 +32,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        // BlocProvider(
-        //   create: (BuildContext context) =>
-        //   LocalCartBloc()..add(InItLocalCartEvent()),
-        // ),
-      ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: TextUtils.appTitle,
-        themeMode: ThemeMode.system,
-        theme: ThemeData(
-          colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
-          useMaterial3: true,
-          brightness: Brightness.light,
-        ),
-        darkTheme: ThemeData(
-          colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
-          useMaterial3: true,
-          brightness: Brightness.dark,
-        ),
-        routerConfig: RouterManager.getInstance.router,
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: TextUtils.appTitle,
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
+        colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
+        useMaterial3: true,
+        brightness: Brightness.light,
       ),
+      darkTheme: ThemeData(
+        colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
+        useMaterial3: true,
+        brightness: Brightness.dark,
+      ),
+      routerConfig: RouterManager.getInstance.router,
     );
   }
 }

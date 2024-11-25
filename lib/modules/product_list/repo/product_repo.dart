@@ -8,24 +8,26 @@ import '../../../extension/logger_extension.dart';
 import '../model/product.dart';
 
 class ProductRepo {
-  Future<List<Product>> getProducts() async {
+  Future<ProductList?> getProducts() async {
     try {
-       Map<String, String> headers = {};
+      Map<String, String> headers = {};
       ApiReturnModel? response = await apiRepo().callApi(
           tag: 'Products',
-          uri: ApiUrlConst.books,
+          uri: ApiUrlConst.productsURL,
           method: Method.get,
           headers: headers,
           queryParameters: {});
       if (response?.responseString != null) {
         var v = json.decode(response?.responseString ?? "");
-        AppLog.e(v);
-        Product products = Product();
-        return [];
+
+        var resp = ProductList.fromJson(v);
+        return resp;
       }
     } catch (e, stacktrace) {
       AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
     }
-    return [];
+    return null;
   }
 }
+
+class NetworkError extends Error {}

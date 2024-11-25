@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cart/modules/product_list/repo/product_repo.dart';
-import 'package:flutter_cart/widget/custom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cart/modules/product_list/view/product_build.dart';
 import 'package:flutter_cart/widget/custom_text.dart';
+
+import '../../../extension/logger_extension.dart';
+import '../bloc/product_list_bloc.dart';
+import '../repo/product_repo.dart';
+import '../utils/product_list_utils.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -12,40 +17,52 @@ class ProductList extends StatefulWidget {
 
 class _ProductListState extends State<ProductList> {
 
+  // final CovidBloc _newsBloc = CovidBloc();
+final ProductListBloc _newsBloc = ProductListBloc();
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async{
-      await ProductRepo().getProducts();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // await ProductRepo().getProducts();
+      _newsBloc.add(GetProductList());
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          customText("text"),
-          ListView.builder(
-              shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: (_, int index) {
-                return Row(
-                  children: [
-                    Image.network("src", height: 48, width: 48),
-                    Column(
-                      children: [
-                        customText("pName"),
-                        customText("price"),
-                      ],
-                    ),
-                    customElevatedButton(
-                        child: customText("Add"), onPressed: () {}),
-                  ],
-                );
-              }),
-        ],
+    return BlocProvider(
+      create: (_) => _newsBloc,
+      child: BlocListener<ProductListBloc, ProductListState>(
+        listener: (context, state) {
+          AppLog.d("message_onion");
+          if (state is ProductListError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message!),
+              ),
+            );
+          }
+        },
+        child: BlocBuilder<ProductListBloc, ProductListState>(
+          builder: (context, state) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: state is ProductListInitial || state is ProductListLoading
+                  ? ProductListUtils().buildLoading()
+                  : state is ProductListLoaded
+                      ? Column(
+                          children: [
+                            customText("text"),
+                            ProductBuild(prdList: state.productModel.items?.products?.notc??[],),
+                          ],
+                        )
+                      : state is ProductListError
+                          ? Container(color: Colors.red)
+                          : Container(color: Colors.yellow),
+            );
+          },
+        ),
       ),
     );
   }
