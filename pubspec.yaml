@@ -122,6 +122,8 @@ dependencies:
 #  auto_route: ^9.2.2
 #  flow_builder: ^0.1.0
 
+  toastification: ^2.3.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -145,8 +147,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+   - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
+
 import '../extension/logger_extension.dart';
 import 'screen_utils.dart';
 

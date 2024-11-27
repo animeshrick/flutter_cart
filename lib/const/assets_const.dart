@@ -57,7 +57,7 @@ class AssetsConst {
   static const String bigenderIcon = "assets/icon/bigender.png";
   static const String selectedBigenderIcon = "assets/icon/selectedBigender.png";
   static const String starBlackIcon = "assets/icon/starBlack.png";
-  static const String ssNoImageLogo = "assets/icon/ss-no-image-logo.png";
+  static const String ssNoImageLogo = "assets/images/no-image.png";
   static const String clockIcon = "assets/icon/clock-icon.svg";
   static const String manageAddressIcon = "assets/icon/manage_address.svg";
   static const String termsConditionIcon = "assets/icon/terms_condition.svg";

@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cart/router/router_manager.dart';
 import 'package:flutter_cart/utils/text_utils.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:path_provider/path_provider.dart'; // For getting the desktop path
+import 'package:toastification/toastification.dart';
 
 import 'const/color_const.dart';
 import 'extension/hex_color.dart';
+import 'modules/product_list/local_product_bloc/local_products_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,21 +32,30 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: TextUtils.appTitle,
-      themeMode: ThemeMode.system,
-      theme: ThemeData(
-        colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
-        useMaterial3: true,
-        brightness: Brightness.light,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => LocalProductsBloc()..add(GetLocalProductList()),
+        ),
+      ],
+      child: ToastificationWrapper(
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: TextUtils.appTitle,
+          themeMode: ThemeMode.system,
+          theme: ThemeData(
+            colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
+            useMaterial3: true,
+            brightness: Brightness.light,
+          ),
+          darkTheme: ThemeData(
+            colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
+            useMaterial3: true,
+            brightness: Brightness.dark,
+          ),
+          routerConfig: RouterManager.getInstance.router,
+        ),
       ),
-      darkTheme: ThemeData(
-        colorSchemeSeed: HexColor.fromHex(ColorConst.baseHexColor),
-        useMaterial3: true,
-        brightness: Brightness.dark,
-      ),
-      routerConfig: RouterManager.getInstance.router,
     );
   }
 }

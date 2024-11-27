@@ -1,3 +1,5 @@
+import 'package:flutter_cart/service/value_handler.dart';
+
 class ProductList {
   Items? items;
 
@@ -280,10 +282,16 @@ class Product {
     // strength = json['Strength'];
     // isCustomizable = json['IsCustomizable'];
     // highlightedTerms = json['HighlightedTerms'];
-    offerPrice = num.parse(json['OfferPrice'].toString());
+    offerPrice = ValueHandler().numify(json['OfferPrice'].toString());
     // discountPercent = json['DiscountPercent'];
   }
-
+   Map<String, dynamic> toJson() {
+     return {
+       'ProductId': productId,
+       'DisplayName': displayName,
+       'OfferPrice': offerPrice,
+     };
+   }
 }
 
 class Salts {
