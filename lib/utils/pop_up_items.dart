@@ -261,6 +261,7 @@ class PopUpItems {
         onDismissed: (toastItem) => print('Toast ${toastItem.id} dismissed'),
       ),
     );
+    toastification.dismissAll();
   }
 
   Future<DateTime?> buildMaterialDatePicker(
