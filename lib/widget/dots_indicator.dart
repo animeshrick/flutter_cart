@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 typedef OnTap = void Function(int position);
 
 class DotsIndicator extends StatelessWidget {
-  final int dotsCount, position;
+  final int dotsCount,position;
   final DotsDecorator decorator;
   final Axis axis;
   final bool reversed;

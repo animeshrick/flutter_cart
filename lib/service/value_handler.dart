@@ -1,19 +1,31 @@
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:universal_html/parsing.dart';
 
 import '../extension/logger_extension.dart';
 import '../service/context_service.dart';
 
 class ValueHandler {
+  int generateTimestamp() {
+    final now = DateTime.now();
+    return now.millisecondsSinceEpoch;
+  }
+
   String? stringify(var value) {
-    if (value == null || value.toString().toLowerCase() == "null") {
-      return null;
-    } else {
-      return "$value";
+    try {
+      if (value == null || value.toString().toLowerCase() == "null") {
+        return null;
+      } else {
+        return "$value";
+      }
+    } catch (e, stacktrace) {
+      AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
     }
+    return null;
   }
 
   int? intify(var value) {
@@ -23,7 +35,7 @@ class ValueHandler {
           value.toString().trim().isEmpty) {
         return null;
       } else {
-        return int.parse("$value");
+        return num.parse("$value").toInt();
       }
     } catch (e, stacktrace) {
       AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
@@ -74,6 +86,55 @@ class ValueHandler {
       AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
     }
     return null;
+  }
+
+  ///  12 may 2023
+  String? dateTimeEEEDMMMYYYY2({String? dateTime}) {
+    try {
+      if (dateTime?.isNotEmpty == true) {
+        String date =
+            DateFormat("dd MMM yyyy").format(DateTime.parse(dateTime!));
+        return date;
+      }
+    } catch (e, stacktrace) {
+      AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
+    }
+    return null;
+  }
+
+  /// 9th Sept, 2021
+  String? dateTimeDthMMMYYYY({String? dateTime}) {
+    try {
+      if (dateTime?.isNotEmpty == true) {
+        DateTime tempDateTime = DateTime.parse(dateTime!);
+        String date = DateFormat("MMMM, yyyy").format(tempDateTime);
+        return "${tempDateTime.day}${_getDayOfMonthSuffix(tempDateTime.day)} $date";
+      }
+    } catch (e, stacktrace) {
+      AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
+    }
+    return null;
+  }
+
+  String _getDayOfMonthSuffix(int dayNum) {
+    if (!(dayNum >= 1 && dayNum <= 31)) {
+      throw Exception('Invalid day of month');
+    }
+
+    if (dayNum >= 11 && dayNum <= 13) {
+      return 'th';
+    }
+
+    switch (dayNum % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
   }
 
   Duration dateTimeCompare({String? dateTime, DateTime? compareWithDate}) {
@@ -163,12 +224,96 @@ class ValueHandler {
         src.toString().isNotEmpty &&
         src != "null" &&
         src != "Null" &&
+        src != "NULL" &&
         src != "";
     return value;
+  }
+
+  setNullTextToZero(src) {
+    return isTextNotEmptyOrNull(src) ? src : 0;
+  }
+
+  String setNullTextToBlank(final String input) {
+    return !isTextNotEmptyOrNull(input) ? "" : input;
+  }
+
+  String? setNullBlankTextToNullAbleString(final String? input) {
+    return !isTextNotEmptyOrNull(input) ? null : input;
+  }
+
+  bool isNonZeroNumericValue(dynamic txt) {
+    String? res = stringify(txt);
+    if (isTextNotEmptyOrNull(res)) {
+      try {
+        return num.parse(res!) > 0;
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
   }
 
   double dp({required double val, required int places}) {
     String temp = val.toStringAsFixed(places);
     return double.parse(temp);
   }
+
+  String stringToBase64({required String value}) {
+    return base64Encode(utf8.encode(value));
+  }
+
+  String base64ToString({required String encoded}) {
+    return utf8.decode(base64Decode(encoded));
+  }
+
+  String uriEncodeForm({required Map<String, dynamic> body}) {
+    List parts = [];
+    body.forEach((key, value) {
+      parts.add('$key=${value ?? ""}');
+    });
+    String formData = parts.join('&');
+    return formData;
+  }
+
+  String encryptXmlRequest(String input) {
+    if (input.isEmpty) return "";
+    try {
+      String urlEncodedData = Uri.encodeComponent(input);
+      List<int> data = utf8.encode(urlEncodedData);
+      return base64Encode(data);
+    } catch (e, stacktrace) {
+      AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
+      return "";
+    }
+  }
+
+  bool isHtml(String text) {
+    final RegExp htmlRegExp = RegExp(r'<[^>]*>');
+    return htmlRegExp.hasMatch(text);
+  }
+
+  String parseHtmlToText(String htmlString) {
+    // Create a document from the HTML string
+    final document = parseHtmlDocument(htmlString);
+    // Extract all text content
+    return document.body?.text ?? ''; // Extracts all text content from the body
+  }
+
+  /// *
+  /// todo
+  ///  @Note Please don't change this encryption algo as it same as in Phonegap app
+  ///  msg, key , algo
+  ///  return different types of hmac encryption in md5
+  ///  Link: http://www.supermind.org/blog/1102/generating-hmac-md5-sha1-sha256-etc-in-java
+  String hmacDigest(String msg, String keyString, Hash algo) {
+    var key = utf8.encode(keyString);
+    var bytes = utf8.encode(msg);
+
+    var hmacSha256 = Hmac(algo, key);
+    var digest = hmacSha256.convert(bytes);
+
+    return '$digest';
+  }
+
+  String frontCapitalize(String s) => s[0].toUpperCase() + s.substring(1);
 }

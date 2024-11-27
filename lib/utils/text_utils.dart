@@ -1,6 +1,21 @@
+import '../extension/logger_extension.dart';
+
 class TextUtils {
   // ignore: non_constant_identifier_names
+  static String loading = "Loading ...";
+
+  // ignore: non_constant_identifier_names
+  static String success = "Success";
+
+  // ignore: non_constant_identifier_names
   static String user_is_inActive = "User is inActive.";
+
+  // ignore: non_constant_identifier_names
+  static String date = "Date";
+
+// ignore: non_constant_identifier_names
+  static String error_msg_dosage_rest =
+      "Only @# unit(s) of this item can be added per order.";
 
   // ignore: non_constant_identifier_names
   static String dashboard = "Dashboard";
@@ -18,16 +33,31 @@ class TextUtils {
   static String sign_out = "Sign Out";
 
   // ignore: non_constant_identifier_names
+  static String sort = "Sort";
+
+  // ignore: non_constant_identifier_names
   static String order = "Order";
 
   // ignore: non_constant_identifier_names
+  static String order_placed_successfully = "Order Placed Successfully";
+
+  // ignore: non_constant_identifier_names
+  static String order_details = "Order Details";
+
+  // ignore: non_constant_identifier_names
   static String products = "Products";
+
+  // ignore: non_constant_identifier_names
+  static String medicines = "Medicines";
 
   // ignore: non_constant_identifier_names
   static String test_result_analysis = "Test Result Analysis";
 
   // ignore: non_constant_identifier_names
   static String change_patient = "Change Patient";
+
+  // ignore: non_constant_identifier_names
+  static String check_out = "Checkout";
 
   // ignore: non_constant_identifier_names
   static String download_report = "Download Report";
@@ -70,10 +100,48 @@ class TextUtils {
       "Please Check in terms & condition to proceed.";
 
   // ignore: non_constant_identifier_names
+  static String upload_from_device = "From Device";
+
+  // ignore: non_constant_identifier_names
+  static String from_device = "From Device";
+
+  // ignore: non_constant_identifier_names
+  static String select_from_my_prescription = "Select from my prescription";
+
+  // ignore: non_constant_identifier_names
+  static String order_amount = "Order Amount";
+
+  // ignore: non_constant_identifier_names
+  static String order_now = "Order Now";
+
+  // ignore: non_constant_identifier_names
+  static String not_serviceable_pinCode = "Not Serviceable \nPinCode.";
+
+  // ignore: non_constant_identifier_names
+  static String pay_using = "Pay Using";
+
+  // ignore: non_constant_identifier_names
   static String set_location_msg = "Please set service location to proceed.";
 
   // ignore: non_constant_identifier_names
-  static String payment_fail_msg =
+  static String cod_fail_product_msg =
+      "Something went wrong. Please try again later, or choose an alternative payment method to complete your order.";
+
+  // ignore: non_constant_identifier_names
+  static String cod_fail_lab_msg =
+      "Something went wrong. Please try again later, or choose an alternative payment method to complete your Booking.";
+
+  // ignore: non_constant_identifier_names
+  static String payment_fail_product_msg =
+      "Possible reasons why your order has failed :-\n\n"
+      "Internet connectivity issue.\n"
+      "Data transfer error.\n"
+      "Lack of electronic response from your Bank.\n"
+      "Insufficient funds in your Bank Account/Credit card.\n"
+      "Used Credit or debit card is expired or canceled.";
+
+  // ignore: non_constant_identifier_names
+  static String payment_fail_lab_msg =
       "Possible reasons why your Pathological Test Booking has failed :-\n\n"
       "Internet connectivity issue.\n"
       "Data transfer error.\n"
@@ -103,6 +171,12 @@ class TextUtils {
   static String select_address = "Select Address";
 
   // ignore: non_constant_identifier_names
+  static String select_location = "Select Location";
+
+  // ignore: non_constant_identifier_names
+  static String delivering_to = "Delivering to";
+
+  // ignore: non_constant_identifier_names
   static String age = "Age";
 
   // ignore: non_constant_identifier_names
@@ -115,14 +189,23 @@ class TextUtils {
   static String apply = "Apply";
 
   // ignore: non_constant_identifier_names
+  static String applied = "Applied";
+
+  // ignore: non_constant_identifier_names
   static String ok = "Ok";
+
+  // ignore: non_constant_identifier_names
+  static String cancel = "Cancel";
+
+  // ignore: non_constant_identifier_names
+  static String cancel_order = "Cancel Order";
 
   // ignore: non_constant_identifier_names
   static String update_app = "Update App?";
 
   // ignore: non_constant_identifier_names
   static String update_msg =
-      "A new version of {{appName}} is available! Version {{currentAppStoreVersion}} is now available-you have {{currentInstalledVersion}}.";
+      "A new version of {{appName}} is available! Version {{currentAppStoreVersion}} is now available.You have {{currentInstalledVersion}}";
 
   // ignore: non_constant_identifier_names
   static String release_notes = "Release Notes";
@@ -134,7 +217,13 @@ class TextUtils {
   static String available_coupon = "Available coupons";
 
   // ignore: non_constant_identifier_names
+  static String unavailable_coupon = "Unavailable coupons";
+
+  // ignore: non_constant_identifier_names
   static String available_tests = "Available Tests";
+
+  // ignore: non_constant_identifier_names
+  static String available_numbers = "Available Numbers";
 
   // ignore: non_constant_identifier_names
   static String save_more_with_coupon = "Save more with coupon";
@@ -144,6 +233,9 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String search = "Search";
+
+  // ignore: non_constant_identifier_names
+  static String search_product_brand = "Search for product or brand.";
 
   // ignore: non_constant_identifier_names
   static String popular_medical_test = "Popular Medical Test";
@@ -176,6 +268,12 @@ class TextUtils {
   static String editProfile = "Edit Profile";
 
   // ignore: non_constant_identifier_names
+  static String edit = "Edit";
+
+  // ignore: non_constant_identifier_names
+  static String edit_number = "Edit Number";
+
+  // ignore: non_constant_identifier_names
   static String contactNo = "8069506950";
 
   // ignore: non_constant_identifier_names
@@ -183,6 +281,16 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String service_location = "Service Location";
+
+  // ignore: non_constant_identifier_names
+  static String get_delivery_estimate = "Get Delivery Estimate";
+
+  // ignore: non_constant_identifier_names
+  static String serve_you_soon = "We will serve you soon.";
+
+  // ignore: non_constant_identifier_names
+  static String serve_you_soon_pin_code_product_details =
+      "Services are currently not available at your pincode. We will serve you soon.";
 
   // ignore: non_constant_identifier_names
   static String sample_report = "Sample report";
@@ -212,10 +320,16 @@ class TextUtils {
   static String records = "Records";
 
   // ignore: non_constant_identifier_names
+  static String resend = "Resend";
+
+  // ignore: non_constant_identifier_names
   static String medical_records = "Medical Records";
 
   // ignore: non_constant_identifier_names
   static String menu = "Menu";
+
+  // ignore: non_constant_identifier_names
+  static String account = "Account";
 
   // ignore: non_constant_identifier_names
   static String see_all = "See all";
@@ -261,6 +375,9 @@ class TextUtils {
   static String round_off = "Round Off";
 
   // ignore: non_constant_identifier_names
+  static String small_order_fee = "Small Order Fee";
+
+  // ignore: non_constant_identifier_names
   static String collection_charge = "Collection Charge";
 
   // ignore: non_constant_identifier_names
@@ -277,6 +394,9 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String payment_summary = "Payment Summary ";
+
+  // ignore: non_constant_identifier_names
+  static String bill_summary = "Bill Summary";
 
   // ignore: non_constant_identifier_names
   static String status = "Status";
@@ -304,6 +424,9 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String add_cart = "Add Cart";
+
+  // ignore: non_constant_identifier_names
+  static String cart = "Cart";
 
   // ignore: non_constant_identifier_names
   static String remove = "Remove";
@@ -342,13 +465,37 @@ class TextUtils {
   static String family_members = "Family members";
 
   // ignore: non_constant_identifier_names
+  static String family_Members = "Family Members";
+
+  // ignore: non_constant_identifier_names
+  static String manage_patients = "Manage Patients";
+
+  // ignore: non_constant_identifier_names
+  static String add_family_members = "Add Family members";
+
+  // ignore: non_constant_identifier_names
+  static String edit_family_members = "Edit Family members";
+
+  // ignore: non_constant_identifier_names
   static String add_patient = "Add Patient";
+
+  // ignore: non_constant_identifier_names
+  static String edit_patient = "Edit Patient";
+
+  // ignore: non_constant_identifier_names
+  static String add_fam_mem = "Add Family Member";
+
+  // ignore: non_constant_identifier_names
+  static String edit_fam_mem = "Edit Family Member";
 
   // ignore: non_constant_identifier_names
   static String add_address = "Add Address";
 
   // ignore: non_constant_identifier_names
   static String address = "Address";
+
+  // ignore: non_constant_identifier_names
+  static String account_settings = "Account Settings";
 
   // ignore: non_constant_identifier_names
   static String enter_address = "Enter Address";
@@ -360,6 +507,15 @@ class TextUtils {
   static String save_address = "Save Address";
 
   // ignore: non_constant_identifier_names
+  static String saved_prescription = "Saved Prescription";
+
+  // ignore: non_constant_identifier_names
+  static String saved_amount = "Saved Amount";
+
+  // ignore: non_constant_identifier_names
+  static String total_savings = "Total Savings";
+
+  // ignore: non_constant_identifier_names
   static String add_a_new_address = "Add a new Address";
 
   // ignore: non_constant_identifier_names
@@ -367,6 +523,12 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String help_support = "Help & Support";
+
+  // ignore: non_constant_identifier_names
+  static String need_help = "Need Help?";
+
+  // ignore: non_constant_identifier_names
+  static String manage_healthbuddy = "Manage healthbuddy";
 
   // ignore: non_constant_identifier_names
   static String others = "OTHERS";
@@ -384,6 +546,12 @@ class TextUtils {
   static String termsCondition = "Terms & Condition";
 
   // ignore: non_constant_identifier_names
+  static String accountSettings = "Account Settings";
+
+  // ignore: non_constant_identifier_names
+  static String FAQ = "Frequently Asked Questions";
+
+  // ignore: non_constant_identifier_names
   static String privacy_policy = "Privacy Policy";
 
   // ignore: non_constant_identifier_names
@@ -394,6 +562,9 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String login = "Login";
+
+  // ignore: non_constant_identifier_names
+  static String login_with_code = "Get Verification Code";
 
   // ignore: non_constant_identifier_names
   static String delete_account = "Delete Account";
@@ -478,7 +649,13 @@ class TextUtils {
   static String amount_payable = "Amount payable";
 
   // ignore: non_constant_identifier_names
+  static String amount_to_be_paid = "Amount to be paid";
+
+  // ignore: non_constant_identifier_names
   static String total_amount = "Total amount";
+
+  // ignore: non_constant_identifier_names
+  static String total = "Total";
 
   // ignore: non_constant_identifier_names
   static String you_pay = "You pay";
@@ -490,7 +667,13 @@ class TextUtils {
   static String payment_options = "Payment Options";
 
   // ignore: non_constant_identifier_names
+  static String pay_now = "Pay Now";
+
+  // ignore: non_constant_identifier_names
   static String view_price_breakdown = "View price breakdown";
+
+  // ignore: non_constant_identifier_names
+  static String view_detailed_bill = "View Detailed Bill";
 
   // ignore: non_constant_identifier_names
   static String hide_price_breakdown = "Hide price breakdown";
@@ -513,6 +696,9 @@ class TextUtils {
   static String payment_details = "Payment Details";
 
   // ignore: non_constant_identifier_names
+  static String order_summery = "Order Summary";
+
+  // ignore: non_constant_identifier_names
   static String ref_number = "Ref Number";
 
   // ignore: non_constant_identifier_names
@@ -531,6 +717,9 @@ class TextUtils {
   static String call_doctor = "Call Doctor";
 
   // ignore: non_constant_identifier_names
+  static String call_us = "Call Us";
+
+  // ignore: non_constant_identifier_names
   static String get_pdf_receipt = "Get PDF Receipt";
 
   // ignore: non_constant_identifier_names
@@ -541,6 +730,15 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String rupee = "₹";
+
+  // ignore: non_constant_identifier_names
+  static String remark = "Remark";
+
+  // ignore: non_constant_identifier_names
+  static String out_of_stock = "Out of Stock";
+
+  // ignore: non_constant_identifier_names
+  static String sold_out = "Sold Out";
 
   // ignore: non_constant_identifier_names
   static String appointment_booked_on = "Appointment Booked On";
@@ -615,14 +813,16 @@ class TextUtils {
   static String coupon_discount = "Coupon Discount";
 
   // ignore: non_constant_identifier_names
-  static String enter_your_mobile_number = "Enter your mobile number";
+  static String cart_total = "Cart Total";
+
+  // ignore: non_constant_identifier_names
+  static String enter_your_mobile_number = "Enter a valid mobile no.";
 
   // ignore: non_constant_identifier_names
   static String cannot_be_blank = "can't be blank.";
 
   // ignore: non_constant_identifier_names
-  static String length_grater_than =
-      "length should be grater than or equals to 3.";
+  static String length_grater_than = "should be greater than or equals to 3.";
 
   // ignore: non_constant_identifier_names
   static String enter_valid_msg = "Enter valid";
@@ -643,10 +843,10 @@ class TextUtils {
   static String dateCannotBlank = "Date cannot be blank";
 
   // ignore: non_constant_identifier_names
-  static String emailValidator = "Enter valid Email .";
+  static String emailValidator = "Enter a valid email address";
 
   // ignore: non_constant_identifier_names
-  static String phoneValidation = "Enter a valid mobile no (10 digit)";
+  static String phoneValidation = "Enter a valid 10-digit mobile number";
 
   // ignore: non_constant_identifier_names
   static String otp = "otp";
@@ -679,8 +879,7 @@ class TextUtils {
   static String enter_verification_code = "Enter Verification Code";
 
   // ignore: non_constant_identifier_names
-  static String verification_code_des =
-      "We've sent a one-time password (OTP) on ##. Please enter the OTP below to complete the verification process.";
+  static String verification_code_des = "We have sent an verification code on ##";
 
   // ignore: non_constant_identifier_names
   static String tests = "Tests";
@@ -724,10 +923,13 @@ class TextUtils {
   static String preferred_contact_number = "Preferred Contact Number";
 
   // ignore: non_constant_identifier_names
+  static String preferred_email = "Preferred Email";
+
+  // ignore: non_constant_identifier_names
   static String contact_number = "Contact Number";
 
   // ignore: non_constant_identifier_names
-  static String file_all_ready_selected = "File all ready selected.";
+  static String file_already_selected = "File already selected.";
 
   // ignore: non_constant_identifier_names
   static String first_name = "First name";
@@ -743,6 +945,9 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String email = "Email";
+
+  // ignore: non_constant_identifier_names
+  static String phone = "Phone";
 
   // ignore: non_constant_identifier_names
   static String enter_email = "Enter email";
@@ -773,6 +978,9 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String continuetxt = "Continue";
+
+  // ignore: non_constant_identifier_names
+  static String continue_with = "Continue with";
 
   // ignore: non_constant_identifier_names
   static String skip = "Skip";
@@ -808,7 +1016,7 @@ class TextUtils {
   static String recommended_health_package = "Recommended Health Package";
 
   // ignore: non_constant_identifier_names
-  static String appTitle = "Test Des";
+  static String appTitle = "Order medicines, book lab test, book appointment.";
 
   // ignore: non_constant_identifier_names
   static String provide_email =
@@ -835,6 +1043,12 @@ class TextUtils {
 
   // ignore: non_constant_identifier_names
   static String already_added = "Already added.";
+
+  // ignore: non_constant_identifier_names
+  static String added = "Added";
+
+  // ignore: non_constant_identifier_names
+  static String moreInfo = "More Information";
 
   // ignore: non_constant_identifier_names
   static String body_weight_kg = "Body weight (Kg)";
@@ -935,4 +1149,378 @@ class TextUtils {
           "Other"
         ]
       : ["Relative", "Friend", "Children", "Spouse", "Parent", "Other"];
+
+  // ignore: non_constant_identifier_names
+  static String totalSavings = "Total Savings";
+
+  // ignore: non_constant_identifier_names
+  static String myOrders = "My Orders";
+
+  // ignore: non_constant_identifier_names
+  static String yourDetails = "Your Details";
+
+  // ignore: non_constant_identifier_names
+  static String other = "Other";
+
+  // ignore: non_constant_identifier_names
+  static String orderDate = "Ordered On";
+
+  // ignore: non_constant_identifier_names
+  static String cancelOrder = "Cancel";
+
+  // ignore: non_constant_identifier_names
+  static String reOrder = "Reorder";
+
+  // ignore: non_constant_identifier_names
+  static String orderID = "Order ID";
+
+  // ignore: non_constant_identifier_names
+  static String shipmentItems = "Shipment Items";
+
+  // ignore: non_constant_identifier_names
+  static String orderedItems = "Ordered Items";
+
+  // ignore: non_constant_identifier_names
+  static String orderTracking = "Order Tracking";
+
+  // ignore: non_constant_identifier_names
+  static String mrpTotal = "MRP Total";
+
+  // ignore: non_constant_identifier_names
+  static String couponDisc = "Coupon Discount on MRP";
+
+  // ignore: non_constant_identifier_names
+  static String bestBefore = "Best Before";
+
+  // ignore: non_constant_identifier_names
+  static String deliverablePincode = "Deliver to";
+
+  // ignore: non_constant_identifier_names
+  static String getItBy = "Get it by";
+
+  // ignore: non_constant_identifier_names
+  static String changePinCode = "Change Pincode";
+
+  // ignore: non_constant_identifier_names
+  static String similarPrd = "Similar Products";
+
+  // ignore: non_constant_identifier_names
+  static String substitutesPrd = "Substitutes of *";
+
+  // ignore: non_constant_identifier_names
+  static String frqBoughtPrd = "Frequently Bought Together";
+
+  // ignore: non_constant_identifier_names
+  static String comSalt = "Composition/Salt";
+
+  // ignore: non_constant_identifier_names
+  static String prdDesc = "Product Description";
+
+  // ignore: non_constant_identifier_names
+  static String prdInfo = "Product Information";
+
+  // ignore: non_constant_identifier_names
+  static String sellerInfo = "Seller Information";
+
+  // ignore: non_constant_identifier_names
+  static String returnPolicy = "Return Policy";
+
+  // ignore: non_constant_identifier_names
+  static String ratingReview = "Ratings & Reviews";
+
+  // ignore: non_constant_identifier_names
+  static String myPrescription = "My Prescription";
+
+  // ignore: non_constant_identifier_names
+  static String uploadPrescription = "Upload Prescription";
+
+  // ignore: non_constant_identifier_names
+  static String deleteMessage = "Are you sure you want to delete?";
+
+  // ignore: non_constant_identifier_names
+  static String useMyLocation = "Use My Location";
+
+  // ignore: non_constant_identifier_names
+  static String pin_code_error_msg = "Please enter a valid pincode";
+
+  // ignore: non_constant_identifier_names
+  static String landmark = "Landmark";
+
+  // ignore: non_constant_identifier_names
+  static String mobileNumber = "Mobile Number";
+
+  // ignore: non_constant_identifier_names
+  static String uploadedOn = "Uploaded on";
+
+  // ignore: non_constant_identifier_names
+  static String close = "Close";
+
+  // ignore: non_constant_identifier_names
+  static String wantPrescriptionType =
+      "How do you want to add your prescription?";
+
+  // ignore: non_constant_identifier_names
+  static String validPrescription = "What is a Valid Prescription?";
+
+  // ignore: non_constant_identifier_names
+  static String validPrescriptionGuide = "Valid Prescription Guide";
+
+  // ignore: non_constant_identifier_names
+  static String process = "Process";
+
+  // ignore: non_constant_identifier_names
+  static String add_more = "Add more";
+
+  // ignore: non_constant_identifier_names
+  static String add_more_to_cart = "Add More Items to your cart";
+
+  // ignore: non_constant_identifier_names
+  static String buyAgain = "Buy Again";
+
+  // ignore: non_constant_identifier_names
+  static String shop_by_category = "Shop by Category";
+
+  // ignore: non_constant_identifier_names
+  static String category = "Category";
+
+  // ignore: non_constant_identifier_names
+  static String serviceRequest = "Service Request";
+
+  // ignore: non_constant_identifier_names
+  static String newServiceRequest = "Raise Service Request";
+
+  // ignore: non_constant_identifier_names
+  static String productRequest = "Product Request";
+
+  // ignore: non_constant_identifier_names
+  static String change = "Change";
+
+  // ignore: non_constant_identifier_names
+  static String change_location = "Change Location";
+
+  // ignore: non_constant_identifier_names
+  static String add = "Add";
+
+  // ignore: non_constant_identifier_names
+  static String updateProfile = "Update Profile";
+
+  // ignore: non_constant_identifier_names
+  static String noResult = "No results found";
+
+  // ignore: non_constant_identifier_names
+  static String comment = "Comments";
+
+  // ignore: non_constant_identifier_names
+  static String add_comment = "Add a comment";
+
+  // ignore: non_constant_identifier_names
+  static String medRadio = "Medicines & Related Products";
+
+  // ignore: non_constant_identifier_names
+  static String otcRadio = "Non Medicines Products";
+
+  // ignore: non_constant_identifier_names
+  static String expiry_date_st = "Exp Dt.";
+
+  // ignore: non_constant_identifier_names
+  static String best_before_st = "Best Before.";
+
+  static String expiry_date = "Expires on";
+
+  // ignore: non_constant_identifier_names
+  static String pendingProductReview = "Product Pending Reviews";
+
+  // ignore: non_constant_identifier_names
+  static String return_btn = "Return";
+
+  // ignore: non_constant_identifier_names
+  static String return_items = "Return Items";
+
+  // ignore: non_constant_identifier_names
+  static String track_order = "Track Order";
+
+  // ignore: non_constant_identifier_names
+  static String track_order_for = "Track Order For";
+
+  // ignore: non_constant_identifier_names
+  static String request = "Request";
+
+  // ignore: non_constant_identifier_names
+  static String reason = "Reason";
+
+  // ignore: non_constant_identifier_names
+  static String download = "Download";
+
+// ignore: non_constant_identifier_names
+  static String cancelWarningText =
+      "Are you sure, you want to cancel this order?";
+
+// ignore: non_constant_identifier_names
+  static String item_total_mrp = "Item Total (MRP)";
+
+// ignore: non_constant_identifier_names
+  static String price_discount = "Price Discount";
+
+  // ignore: non_constant_identifier_names
+  static String shipping_fee = "Shipping Fee";
+
+  // ignore: non_constant_identifier_names
+  static String platform_fee = "Platform Fee";
+
+  // ignore: non_constant_identifier_names
+  static String empty_cart = "Empty Cart";
+
+  // ignore: non_constant_identifier_names
+  static String choose_address = "Choose Address";
+
+  // ignore: non_constant_identifier_names
+  static String choose_shipping_address = "Choose Shipping Address";
+
+  // ignore: non_constant_identifier_names
+  static String delivery_charges = "Delivery Charges";
+
+  // ignore: non_constant_identifier_names
+  static String delivery_charge = "Delivery Charge";
+
+  static String getFormattedMessage(String message, List<String> array) {
+    try {
+      List<String> breakString = message.split('#');
+      StringBuffer builder = StringBuffer();
+
+      for (int i = 0; i < breakString.length; i++) {
+        String src = "";
+        if (i < array.length) {
+          src = array[i];
+        }
+        builder.write(breakString[i] + src);
+      }
+
+      return builder.toString();
+    } catch (e, stacktrace) {
+      AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
+    }
+    return "";
+  }
+
+  ///== Genu
+  // ignore: non_constant_identifier_names
+  static String load_more = "Load more ...";
+
+  // ignore: non_constant_identifier_names
+  static String yes = "Yes";
+
+  // ignore: non_constant_identifier_names
+  static String no = "No";
+
+  // ignore: non_constant_identifier_names
+  static String select_preferred_time_slot = "Select preferred time slot";
+
+  // ignore: non_constant_identifier_names
+  static String consult = "Consult";
+
+  // ignore: non_constant_identifier_names
+  static String health_article = "Health Article";
+
+  // ignore: non_constant_identifier_names
+  static String requested_products = "Requested Products";
+
+  // ignore: non_constant_identifier_names
+  static String lab_tests = "Lab Tests";
+
+  // ignore: non_constant_identifier_names
+  static String appointments = "Appointments";
+
+  // ignore: non_constant_identifier_names
+  static String edit_address = "Edit Address";
+
+  // ignore: non_constant_identifier_names
+  static String enter_landmark = "Enter Landmark";
+
+  // ignore: non_constant_identifier_names
+  static String ft = "Ft";
+
+  // ignore: non_constant_identifier_names
+  static String kgs = "Kgs";
+
+  // ignore: non_constant_identifier_names
+  static String doctor_will_contact_you_on = "Doctor will contact you on";
+
+  // ignore: non_constant_identifier_names
+  static String medical_history = "Medical History";
+
+  // ignore: non_constant_identifier_names
+  static String appointment_cancelled = "Appointment Cancelled";
+
+  // ignore: non_constant_identifier_names
+  static String no_slot_found = "No slot found";
+
+  // ignore: non_constant_identifier_names
+  static String refund_initiated_on = "Refund Initiated On";
+
+  // ignore: non_constant_identifier_names
+  static String refunded_via = "Refunded via";
+
+  // ignore: non_constant_identifier_names
+  static String enter_your_body_vitals = "Enter your Body Vitals";
+
+  // ignore: non_constant_identifier_names
+  static String getVerificationCode = "Get Verification Code";
+
+  // ignore: non_constant_identifier_names
+  static String noRecordFound = "No Record found";
+
+  // ignore: non_constant_identifier_names
+  static String upload = "Upload";
+
+  // ignore: non_constant_identifier_names
+  static String contactSupport = "CONTACT SUPPORT";
+
+  // ignore: non_constant_identifier_names
+  static String Height = "Height";
+
+  // ignore: non_constant_identifier_names
+  static String Weight = "Weight";
+
+  // ignore: non_constant_identifier_names
+  static String allergies = "Allergies";
+
+  // ignore: non_constant_identifier_names
+  static String cancel_appointment = "Cancel Appointment";
+
+  // ignore: non_constant_identifier_names
+  static String dismiss = "Dismiss";
+
+  // ignore: non_constant_identifier_names
+  static String terms_condition = "I agree to the terms and condition.";
+
+  // ignore: non_constant_identifier_names
+  static String slot = "Slot";
+
+  // ignore: non_constant_identifier_names
+  static String saveContinuetxt = "Save&Continue";
+
+  // ignore: non_constant_identifier_names
+  static String atLeastOneValueUpdate = "Please update one value to update.";
+
+  // ignore: non_constant_identifier_names
+  static String brands = "Brands";
+
+  // ignore: non_constant_identifier_names
+  static String policies = "Policies";
+
+  // ignore: non_constant_identifier_names
+  static String issue_type = "Issue Type";
+
+  // ignore: non_constant_identifier_names
+  static String issue_details = "Issue Details";
+
+  // ignore: non_constant_identifier_names
+  static String upload_images = "Uploaded image(s)";
+
+  static String crashMassage = """<h1>Error: Something went wrong</h1>
+        <p>We encountered an unexpected issue. Please try again later.</p>""";
+
+  static String sendReport = "Send Report";
+
+  static String locationGenMsg = "Allow location access and turn on location to check service availability in your area.";
 }

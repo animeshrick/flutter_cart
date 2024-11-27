@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_cart/modules/dashboard/view/dashboard.dart';
 import 'package:flutter_cart/modules/product_list/view/product_list.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,10 +28,16 @@ class RouterManager {
         name: RouteName.initialView,
         path: RouteName.initialView,
         builder: (BuildContext context, GoRouterState state) {
+          return Dashboard();
+        },
+      ),
+      GoRoute(
+        name: RouteName.products,
+        path: RouteName.products,
+        builder: (BuildContext context, GoRouterState state) {
           return ProductList();
         },
       ),
-
 
       // GoRoute(
       //   name: RouteName.bookingReschedule,
@@ -91,7 +97,7 @@ class RouterManager {
                 },
                 icon: const Icon(Icons.clear))
             : Container(),
-        title: customText(TextUtils.notFound,
+        title: CustomText(TextUtils.notFound,
             color: HexColor.fromHex(ColorConst.primaryDark), size: 20),
       ),
       body: Center(

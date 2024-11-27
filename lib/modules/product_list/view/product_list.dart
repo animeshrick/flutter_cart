@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cart/modules/product_list/view/product_build.dart';
-import 'package:flutter_cart/widget/custom_text.dart';
 
 import '../../../extension/logger_extension.dart';
 import '../bloc/product_list_bloc.dart';
-import '../repo/product_repo.dart';
 import '../utils/product_list_utils.dart';
 
 class ProductList extends StatefulWidget {
@@ -16,15 +14,12 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
-
-  // final CovidBloc _newsBloc = CovidBloc();
-final ProductListBloc _newsBloc = ProductListBloc();
+  final ProductListBloc _newsBloc = ProductListBloc();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // await ProductRepo().getProducts();
       _newsBloc.add(GetProductList());
     });
   }
@@ -51,11 +46,9 @@ final ProductListBloc _newsBloc = ProductListBloc();
               body: state is ProductListInitial || state is ProductListLoading
                   ? ProductListUtils().buildLoading()
                   : state is ProductListLoaded
-                      ? Column(
-                          children: [
-                            customText("text"),
-                            ProductBuild(prdList: state.productModel.items?.products?.notc??[],),
-                          ],
+                      ? ProductBuild(
+                          prdList:
+                              state.productModel.items?.products?.notc ?? [],
                         )
                       : state is ProductListError
                           ? Container(color: Colors.red)

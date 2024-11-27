@@ -89,11 +89,11 @@ class Validator {
     // return regExp.hasMatch(em);
 
     if (value == null || value.isEmpty) {
-      return "${TextUtils.pinCode} ${TextUtils.cannot_be_blank}";
+      return TextUtils.pin_code_error_msg;
     } else if (value[0] == " ") {
-      return "${TextUtils.enter_valid_msg} ${TextUtils.pinCode} .";
+      return TextUtils.pin_code_error_msg;
     } else if (value.length != 6 || !validate) {
-      return "${TextUtils.enter_valid_msg} ${TextUtils.pinCode} .";
+      return TextUtils.pin_code_error_msg;
     } else {
       return null;
     }
