@@ -35,10 +35,11 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> getCountUpdate() async {
-    List<Product> list = await ProductStorageHive().getAllProducts();
+    List<Product> list = await ProductStorageHive.instance.getAllProducts();
     setState(() => count = list.length.toString());
 
-    AppLog.d(list.map((product) => product.displayName).join(", "), tag: "Onion_prd--:");
+    AppLog.d(list.map((product) => product.displayName).join(", "),
+        tag: "Onion_prd--:");
   }
 
   @override
@@ -52,10 +53,10 @@ class _DashboardState extends State<Dashboard> {
             child: Badge(
                 backgroundColor: HexColor.fromHex(ColorConst.error500),
                 label: CustomText(count),
-                isLabelVisible:  ValueHandler().isTextNotEmptyOrNull(count),
+                isLabelVisible: ValueHandler().isTextNotEmptyOrNull(count),
                 child: CustomIconButton(
                     onPressed: () async {
-                    await  getCountUpdate();
+                      await getCountUpdate();
                     },
                     icon: Icon(Icons.shopping_cart_outlined))),
           ),
@@ -100,7 +101,7 @@ class _DashboardState extends State<Dashboard> {
               CustomGOEButton(
                   backGroundColor: Colors.purpleAccent,
                   onPressed: () async {
-                    await ProductStorageHive().clearAllProducts();
+                    await ProductStorageHive.instance.clearAllProducts();
                     setState(() => count = "");
                   },
                   size: Size(ScreenUtils.aw() * 0.4, 48),

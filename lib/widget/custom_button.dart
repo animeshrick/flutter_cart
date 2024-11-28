@@ -1,12 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cart/extension/sizing.dart';
 import 'package:flutter_cart/extension/spacing.dart';
+import 'package:flutter_cart/modules/product_list/model/product.dart';
 
 import '../const/color_const.dart';
 import '../extension/color_exe.dart';
 import '../extension/hex_color.dart';
+import '../modules/product_list/local_product_bloc/local_products_bloc.dart';
+import '../storage/product_sotrage/product_hive.dart';
+import '../utils/text_utils.dart';
 import 'custom_image.dart';
 import 'custom_text.dart';
+
+Widget customCartButton({required Product? product}) =>
+    BlocBuilder<LocalProductsBloc, LocalProductsState>(
+      builder: (context, state) {
+        return ProductStorageHive.instance.checkIfProductContainInCart(
+                allProductList: [], productId: product?.productId ?? "")
+            ? CustomGOEButton(
+                backGroundColor: HexColor.fromHex(ColorConst.complimentary500),
+                onPressed: () {
+                  context.read<LocalProductsBloc>().add(
+                      RemoveSingleLocalProduct(product: product ?? Product()));
+                },
+                child: CustomTextEnum(TextUtils.remove).textSM())
+            : CustomGOEButton(
+                backGroundColor: HexColor.fromHex(ColorConst.success500),
+                onPressed: () {
+                  context.read<LocalProductsBloc>().add(
+                      AddSingleLocalProduct(product: product ?? Product()));
+                },
+                child: CustomTextEnum(TextUtils.add).textSM());
+      },
+    );
 
 @Deprecated('Use [CustomGOEButton]')
 class CustomElevatedButton extends StatelessWidget {

@@ -1,18 +1,18 @@
 import 'package:flutter_cart/extension/logger_extension.dart';
+import 'package:flutter_cart/service/value_handler.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../modules/product_list/model/product.dart';
 
 class ProductStorageHive {
-  static final ProductStorageHive instance = ProductStorageHive._internal();
+  ProductStorageHive._();
+
+  static final ProductStorageHive _productLocalSote = ProductStorageHive._();
+
+  static ProductStorageHive get instance => _productLocalSote;
+
   static const String _productBox = 'productsBox';
-
-  ProductStorageHive._internal();
-
-  factory ProductStorageHive() {
-    return instance;
-  }
 
   Future<void> initializeHive() async {
     final dir = await getApplicationDocumentsDirectory();
@@ -29,11 +29,14 @@ class ProductStorageHive {
   }
 
   // Save a single product
-  Future<void> saveProduct(Product product) async {
-    AppLog.t("${product.displayName}--${product.offerPrice}--${product.productId}", tag: "saveProduct");
-
-    final box = await _openBox();
-    await box.put(product.productId, product.toJson());
+  Future<void> saveProduct(Product? product) async {
+    if (ValueHandler().isTextNotEmptyOrNull(product?.productId)) {
+      AppLog.t(
+          "${product?.displayName}--${product?.offerPrice}--${product?.productId}",
+          tag: "saveProduct");
+      final box = await _openBox();
+      await box.put(product?.productId, product?.toJson());
+    }
   }
 
   // Retrieve all products
@@ -70,5 +73,17 @@ class ProductStorageHive {
     final box = await _openBox();
     await box.clear();
     AppLog.t("clearAllProducts");
+  }
+
+  bool checkIfProductContainInCart(
+      {required List<Product> allProductList, required String productId}) {
+    try {
+      return allProductList
+          .where((element) => element.productId == productId)
+          .isNotEmpty;
+    } catch (e, stacktrace) {
+      AppLog.e(e.toString(), error: e, stackTrace: stacktrace);
+      return false;
+    }
   }
 }

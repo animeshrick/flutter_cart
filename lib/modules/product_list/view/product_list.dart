@@ -32,7 +32,7 @@ class _ProductListState extends State<ProductList> {
   String count = "";
 
   Future<void> getCountUpdate() async {
-    List<Product> list = await ProductStorageHive().getAllProducts();
+    List<Product> list = await ProductStorageHive.instance.getAllProducts();
     setState(() => count = list.length.toString());
 
     AppLog.d(list.map((product) => product.displayName).join(" & "), tag: "Onion_prd--:");
@@ -72,11 +72,10 @@ class _ProductListState extends State<ProductList> {
                     child: Badge(
                         backgroundColor: HexColor.fromHex(ColorConst.error500),
                         label: CustomText(count),
-                        isLabelVisible:
-                            ValueHandler().isTextNotEmptyOrNull(count),
+                        isLabelVisible:  ValueHandler().isTextNotEmptyOrNull(count),
                         child: CustomIconButton(
                             onPressed: () async {
-                              await getCountUpdate();
+                              await  getCountUpdate();
                             },
                             icon: Icon(Icons.shopping_cart_outlined))),
                   ),
@@ -129,7 +128,9 @@ class _ProductListState extends State<ProductList> {
                                     ),
                                   ],
                                 ),
-                                CustomGOEButton(
+
+                                customCartButton(product: product),
+                                /*CustomGOEButton(
                                     backGroundColor: Colors.green,
                                     radius: 8,
                                     child: const CustomText("Add",
@@ -140,12 +141,12 @@ class _ProductListState extends State<ProductList> {
                                           HexColor.fromHex(
                                               ColorConst.success200),
                                           type: ToastificationType.success);
-                                      await ProductStorageHive()
+                                      await ProductStorageHive.instance
                                           .saveProduct(product ?? Product());
 
                                         await getCountUpdate();
 
-                                    }),
+                                    }),*/
                               ],
                             );
                           })

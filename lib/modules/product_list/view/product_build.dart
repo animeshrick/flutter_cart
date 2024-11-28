@@ -67,11 +67,8 @@ class _ProductBuildState extends State<ProductBuild> {
                         "${product?.displayName ?? ""} added successfully!",
                         HexColor.fromHex(ColorConst.success200),
                         type: ToastificationType.success);
-                    await ProductStorageHive()
-                        .saveProduct(product ?? Product());
-                    setState(() {
-
-                    });
+                    await ProductStorageHive.instance.saveProduct(product);
+                    setState(() {});
                   }),
             ],
           );

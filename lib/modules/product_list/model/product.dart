@@ -58,7 +58,7 @@ class Product {
   // String? offerTitle;
   // String? encodeProdId;
   // int? dosageAlert;
-  // int? bBMinQty;
+  int? bBMinQty;
   // int? recentOrderCount;
   // int? isFeatured;
   // String? brand;
@@ -141,7 +141,7 @@ class Product {
       // this.offerTitle,
       // this.encodeProdId,
       // this.dosageAlert,
-      // this.bBMinQty,
+      this.bBMinQty,
       // this.recentOrderCount,
       // this.isFeatured,
       // this.brand,
@@ -224,7 +224,7 @@ class Product {
     // offerTitle = json['OfferTitle'];
     // encodeProdId = json['EncodeProdId'];
     // dosageAlert = json['DosageAlert'];
-    // bBMinQty = json['BBMinQty'];
+    bBMinQty = json['BBMinQty'];
     // recentOrderCount = json['RecentOrderCount'];
     // isFeatured = json['IsFeatured'];
     // brand = json['Brand'];
@@ -290,6 +290,7 @@ class Product {
        'ProductId': productId,
        'DisplayName': displayName,
        'OfferPrice': offerPrice,
+       'BBMinQty': bBMinQty,
      };
    }
 }
