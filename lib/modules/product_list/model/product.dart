@@ -16,9 +16,8 @@ class Items {
   Items({this.products});
 
   Items.fromJson(Map<String, dynamic> json) {
-    products = json['products'] != null
-        ? Products.fromJson(json['products'])
-        : null;
+    products =
+        json['products'] != null ? Products.fromJson(json['products']) : null;
   }
 }
 
@@ -45,7 +44,7 @@ class Product {
   // String? bBExpiryDate;
   // int? isPurchased;
   // String? documentId;
-   String? productId;
+  String? productId;
   // int? groupSize;
   // String? refProductId;
   // int? displayFactor;
@@ -78,17 +77,17 @@ class Product {
   // int? bBDiscountPercent;
   // String? offerImage;
   // int? bBHighDisc;
-   String? productImage;
-  // double? bBMRP;
+  String? productImage;
+  num? bBMRP;
   // int? isNew;
-  // String? bBIsOutOfStock;
+  String? bBIsOutOfStock;
   // String? interactiveSubModule;
   // double? bBOfferPrice;
   // int? pTRDiscType;
   // double? pTR;
   // String? hasOffer;
   // int? dosageRestriction;
-   String? displayName;
+  String? displayName;
   // String? prescriptionOTC;
   // int? offerCategoryId;
   // int? orderCount;
@@ -116,92 +115,91 @@ class Product {
   // String? strength;
   // int? isCustomizable;
   // String? highlightedTerms;
-   num? offerPrice;
+  num? offerPrice;
   // int? discountPercent;
 
-  Product(
-      {
-      //   this.salts,
-      // this.interactiveModule,
-      // this.productName,
-      // this.mfgGroup,
-      // this.bBExpiryDate,
-      // this.isPurchased,
-      // this.documentId,
-      this.productId,
-      // this.groupSize,
-      // this.refProductId,
-      // this.displayFactor,
-      // this.bBIsFlashSaleOn,
-      // this.dosageFormDisplaySeq,
-      // this.bBFlashSaleSoldPercent,
-      // this.productShortDescription,
-      // this.applyPincodeWiseDiscount,
-      // this.avgRating,
-      // this.offerTitle,
-      // this.encodeProdId,
-      // this.dosageAlert,
-      this.bBMinQty,
-      // this.recentOrderCount,
-      // this.isFeatured,
-      // this.brand,
-      // this.brandImage,
-      // this.maxSKUOrderCount,
-      // this.active,
-      // this.dealPrice,
-      // this.productAliasName,
-      // this.dealMaxQty,
-      // this.numCustomer,
-      // this.dosageForm,
-      // this.schemeFreeBaseQtyOfferText,
-      // this.lastMRP,
-      // this.pKLotId,
-      // this.primaryDisease,
-      // this.keywords,
-      // this.bBDiscountPercent,
-      // this.offerImage,
-      // this.bBHighDisc,
-       this.productImage,
-      // this.bBMRP,
-      // this.isNew,
-      // this.bBIsOutOfStock,
-      // this.interactiveSubModule,
-      // this.bBOfferPrice,
-      // this.pTRDiscType,
-      // this.pTR,
-      // this.hasOffer,
-      // this.dosageRestriction,
-      this.displayName,
-      // this.prescriptionOTC,
-      // this.offerCategoryId,
-      // this.orderCount,
-      // this.custOfferPrice,
-      // this.isRedeemable,
-      // this.recentProductCount,
-      // this.pTRDiscPercent,
-      // this.numRating,
-      // this.isGiftableProduct,
-      // this.productStatus,
-      // this.customScoreManipulator,
-      // this.custDiscPercent,
-      // this.routeId,
-      // this.deliveryDelayedDay,
-      // this.schemeFreeBaseQty,
-      // this.recentCustCount,
-      // this.sKUOrderCount,
-      // this.unitPrice,
-      // this.pTRDicPct,
-      // this.isFoodProduct,
-      // this.displayRank,
-      // this.bBIsCourierable,
-      // this.gSTPercentage,
-      // this.offerCategory,
-      // this.strength,
-      // this.isCustomizable,
-      // this.highlightedTerms,
-      // this.offerPrice,
-      // this.discountPercent
-      });
+  Product({
+    //   this.salts,
+    // this.interactiveModule,
+    // this.productName,
+    // this.mfgGroup,
+    // this.bBExpiryDate,
+    // this.isPurchased,
+    // this.documentId,
+    this.productId,
+    // this.groupSize,
+    // this.refProductId,
+    // this.displayFactor,
+    // this.bBIsFlashSaleOn,
+    // this.dosageFormDisplaySeq,
+    // this.bBFlashSaleSoldPercent,
+    // this.productShortDescription,
+    // this.applyPincodeWiseDiscount,
+    // this.avgRating,
+    // this.offerTitle,
+    // this.encodeProdId,
+    // this.dosageAlert,
+    this.bBMinQty,
+    // this.recentOrderCount,
+    // this.isFeatured,
+    // this.brand,
+    // this.brandImage,
+    // this.maxSKUOrderCount,
+    // this.active,
+    // this.dealPrice,
+    // this.productAliasName,
+    // this.dealMaxQty,
+    // this.numCustomer,
+    // this.dosageForm,
+    // this.schemeFreeBaseQtyOfferText,
+    // this.lastMRP,
+    // this.pKLotId,
+    // this.primaryDisease,
+    // this.keywords,
+    // this.bBDiscountPercent,
+    // this.offerImage,
+    // this.bBHighDisc,
+    this.productImage,
+    this.bBMRP,
+    // this.isNew,
+    this.bBIsOutOfStock,
+    // this.interactiveSubModule,
+    // this.bBOfferPrice,
+    // this.pTRDiscType,
+    // this.pTR,
+    // this.hasOffer,
+    // this.dosageRestriction,
+    this.displayName,
+    // this.prescriptionOTC,
+    // this.offerCategoryId,
+    // this.orderCount,
+    // this.custOfferPrice,
+    // this.isRedeemable,
+    // this.recentProductCount,
+    // this.pTRDiscPercent,
+    // this.numRating,
+    // this.isGiftableProduct,
+    // this.productStatus,
+    // this.customScoreManipulator,
+    // this.custDiscPercent,
+    // this.routeId,
+    // this.deliveryDelayedDay,
+    // this.schemeFreeBaseQty,
+    // this.recentCustCount,
+    // this.sKUOrderCount,
+    // this.unitPrice,
+    // this.pTRDicPct,
+    // this.isFoodProduct,
+    // this.displayRank,
+    // this.bBIsCourierable,
+    // this.gSTPercentage,
+    // this.offerCategory,
+    // this.strength,
+    // this.isCustomizable,
+    // this.highlightedTerms,
+    // this.offerPrice,
+    // this.discountPercent
+  });
 
   Product.fromJson(Map<String, dynamic> json) {
     // salts = json['Salts'] != null ? Salts.fromJson(json['Salts']) : null;
@@ -211,7 +209,7 @@ class Product {
     // bBExpiryDate = json['BBExpiryDate'];
     // isPurchased = json['IsPurchased'];
     // documentId = json['DocumentId'];
-    productId = json['ProductId'];
+    productId = ValueHandler().stringify(json['ProductId']);
     // groupSize = json['GroupSize'];
     // refProductId = json['RefProductId'];
     // displayFactor = json['DisplayFactor'];
@@ -224,7 +222,7 @@ class Product {
     // offerTitle = json['OfferTitle'];
     // encodeProdId = json['EncodeProdId'];
     // dosageAlert = json['DosageAlert'];
-    bBMinQty = json['BBMinQty'];
+    bBMinQty = ValueHandler().intify(json['BBMinQty']);
     // recentOrderCount = json['RecentOrderCount'];
     // isFeatured = json['IsFeatured'];
     // brand = json['Brand'];
@@ -244,17 +242,17 @@ class Product {
     // bBDiscountPercent = json['BBDiscountPercent'];
     // offerImage = json['OfferImage'];
     // bBHighDisc = json['BBHighDisc'];
-    productImage = json['ProductImage'];
-    // bBMRP = json['BBMRP'];
+    productImage = ValueHandler().stringify(json['ProductImage']);
+    bBMRP = ValueHandler().numify(json['BBMRP']);
     // isNew = json['IsNew'];
-    // bBIsOutOfStock = json['BBIsOutOfStock'];
+    bBIsOutOfStock = ValueHandler().stringify(json['BBIsOutOfStock']);
     // interactiveSubModule = json['InteractiveSubModule'];
     // bBOfferPrice = json['BBOfferPrice'];
     // pTRDiscType = json['PTRDiscType'];
     // pTR = json['PTR'];
     // hasOffer = json['HasOffer'];
     // dosageRestriction = json['DosageRestriction'];
-    displayName = json['DisplayName'];
+    displayName = ValueHandler().stringify(json['DisplayName']);
     // prescriptionOTC = json['PrescriptionOTC'];
     // offerCategoryId = json['OfferCategoryId'];
     // orderCount = json['OrderCount'];
@@ -285,14 +283,18 @@ class Product {
     offerPrice = ValueHandler().numify(json['OfferPrice'].toString());
     // discountPercent = json['DiscountPercent'];
   }
-   Map<String, dynamic> toJson() {
-     return {
-       'ProductId': productId,
-       'DisplayName': displayName,
-       'OfferPrice': offerPrice,
-       'BBMinQty': bBMinQty,
-     };
-   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ProductId': productId,
+      'DisplayName': displayName,
+      'OfferPrice': offerPrice,
+      'BBMinQty': bBMinQty,
+      'BBIsOutOfStock': bBIsOutOfStock,
+      'BBMRP': bBMRP,
+      'ProductImage': productImage,
+    };
+  }
 }
 
 class Salts {

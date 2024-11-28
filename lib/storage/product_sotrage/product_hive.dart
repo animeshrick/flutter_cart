@@ -75,7 +75,7 @@ class ProductStorageHive {
     AppLog.t("clearAllProducts");
   }
 
-  bool checkIfProductContainInCart(
+  bool checkIfProductContainInLocal(
       {required List<Product> allProductList, required String productId}) {
     try {
       return allProductList

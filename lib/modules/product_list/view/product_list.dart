@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cart/extension/spacing.dart';
-import 'package:toastification/toastification.dart';
 
 import '../../../const/color_const.dart';
 import '../../../extension/hex_color.dart';
 import '../../../extension/logger_extension.dart';
 import '../../../service/value_handler.dart';
 import '../../../storage/product_sotrage/product_hive.dart';
-import '../../../utils/pop_up_items.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../utils/text_utils.dart';
 import '../../../widget/app_bar.dart';
@@ -18,6 +16,7 @@ import '../../../widget/custom_text.dart';
 import '../bloc/product_list_bloc.dart';
 import '../model/product.dart';
 import '../utils/product_list_utils.dart';
+import '../widget/product_widget.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({super.key});
@@ -35,7 +34,8 @@ class _ProductListState extends State<ProductList> {
     List<Product> list = await ProductStorageHive.instance.getAllProducts();
     setState(() => count = list.length.toString());
 
-    AppLog.d(list.map((product) => product.displayName).join(" & "), tag: "Onion_prd--:");
+    AppLog.d(list.map((product) => product.displayName).join(" & "),
+        tag: "Onion_prd--:");
   }
 
   @override
@@ -72,10 +72,11 @@ class _ProductListState extends State<ProductList> {
                     child: Badge(
                         backgroundColor: HexColor.fromHex(ColorConst.error500),
                         label: CustomText(count),
-                        isLabelVisible:  ValueHandler().isTextNotEmptyOrNull(count),
+                        isLabelVisible:
+                            ValueHandler().isTextNotEmptyOrNull(count),
                         child: CustomIconButton(
                             onPressed: () async {
-                              await  getCountUpdate();
+                              await getCountUpdate();
                             },
                             icon: Icon(Icons.shopping_cart_outlined))),
                   ),
@@ -128,8 +129,8 @@ class _ProductListState extends State<ProductList> {
                                     ),
                                   ],
                                 ),
-
-                                customCartButton(product: product),
+                                ProductCartAddEditToCartButton(
+                                    product: product),
                                 /*CustomGOEButton(
                                     backGroundColor: Colors.green,
                                     radius: 8,
