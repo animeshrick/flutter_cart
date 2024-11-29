@@ -33,6 +33,7 @@ class ColorConst {
   static String shadowColor2 = "#2e2b38";
   static String lightBlue4 = "#F0F9FF";
   static String bluegrey = "#ccd2dd";
+  static String white = "#ffffff";
 
   // ------------------------------------ GRAY --------------------------------
 

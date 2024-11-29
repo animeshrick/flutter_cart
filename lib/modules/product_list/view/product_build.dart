@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cart/extension/spacing.dart';
-import 'package:flutter_cart/storage/product_sotrage/product_hive.dart';
+import 'package:flutter_cart/storage/product_sotrage/product_storage.dart';
 import 'package:flutter_cart/utils/pop_up_items.dart';
 import 'package:flutter_cart/utils/screen_utils.dart';
 import 'package:flutter_cart/utils/text_utils.dart';
@@ -67,7 +67,7 @@ class _ProductBuildState extends State<ProductBuild> {
                         "${product?.displayName ?? ""} added successfully!",
                         HexColor.fromHex(ColorConst.success200),
                         type: ToastificationType.success);
-                    await ProductStorageHive.instance.saveProduct(product);
+                    await ProductStorage.instance.addUpdateProduct(product);
                     setState(() {});
                   }),
             ],

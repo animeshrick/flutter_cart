@@ -10,7 +10,7 @@ import '../../../const/color_const.dart';
 import '../../../extension/hex_color.dart';
 import '../../../extension/logger_extension.dart';
 import '../../../service/value_handler.dart';
-import '../../../storage/product_sotrage/product_hive.dart';
+import '../../../storage/product_sotrage/product_storage.dart';
 import '../../../utils/screen_utils.dart';
 import '../../../widget/app_bar.dart';
 import '../../../widget/custom_button.dart';
@@ -35,7 +35,7 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> getCountUpdate() async {
-    List<Product> list = await ProductStorageHive.instance.getAllProducts();
+    List<Product> list = await ProductStorage.instance.getAllProducts();
     setState(() => count = list.length.toString());
 
     AppLog.d(list.map((product) => product.displayName).join(", "),
@@ -101,7 +101,7 @@ class _DashboardState extends State<Dashboard> {
               CustomGOEButton(
                   backGroundColor: Colors.purpleAccent,
                   onPressed: () async {
-                    await ProductStorageHive.instance.clearAllProducts();
+                    await ProductStorage.instance.clearAllProducts();
                     setState(() => count = "");
                   },
                   size: Size(ScreenUtils.aw() * 0.4, 48),

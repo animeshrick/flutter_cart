@@ -1,13 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cart/service/value_handler.dart';
-import 'package:flutter_cart/utils/pop_up_items.dart';
-import 'package:toastification/toastification.dart';
 
-import '../../../storage/product_sotrage/product_hive.dart';
+import '../../../storage/product_sotrage/product_storage.dart';
 import '../model/product.dart';
 
 part 'local_products_event.dart';
@@ -21,35 +17,22 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
     on<ClearAllLocalProduct>(_onClearAllLocalProduct);
   }
 
-  /*Future<void> _onGetLocalProductList(
-      GetLocalProductList event, Emitter<LocalProductsState> emit) async {
-    try {
-      emit(LocalProductListLoading());
-
-      List<Product> tempList = [];
-      List<Product> list = await ProductStorageHive.instance.getAllProducts();
-      tempList.addAll(list);
-
-      ProductList productList = ProductList();
-      productList.items?.products?.notc = tempList;
-      emit(LocalProductListLoaded(productList));
-    } catch (e) {
-      emit(const LocalProductListError(
-          "Failed to fetch data. Is your device online?"));
-    }
-  }*/
-
   Future<void> _onGetLocalProductList(
       GetLocalProductList event, Emitter<LocalProductsState> emit) async {
     try {
-      emit(LocalProductListLoading());
+      // emit(LocalProductListLoading());
 
       List<Product> productList =
-          await ProductStorageHive.instance.getAllProducts();
+          await ProductStorage.instance.getAllProducts();
 
       ProductList productListWrapper = ProductList();
-      productListWrapper.items?.products?.notc = productList;
+      productListWrapper.items ??= Items();
+      productListWrapper.items?.products ??= Products();
+      productListWrapper.items?.products?.product ??= [];
 
+      productListWrapper.items!.products?.product?.addAll(productList);
+
+      emit(LocalProductsInitial());
       emit(LocalProductListLoaded(productListWrapper));
     } catch (e) {
       emit(const LocalProductListError(
@@ -60,7 +43,26 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
   Future<void> _onSingleAddLocalProduct(
       AddSingleLocalProduct event, Emitter<LocalProductsState> emit) async {
     try {
-      emit(LocalProductListLoading());
+      List<Product> _localProductList =
+          await ProductStorage.instance.getAllProducts();
+      if (_localProductList
+          .where((element) => element.productId == event.product.productId)
+          .isEmpty) {
+        event.product.bBMinQty = 1;
+        await ProductStorage.instance.addUpdateProduct(event.product);
+        add(GetLocalProductList());
+      } else {
+        Product filteredProduct = _localProductList
+            .where((element) => element.productId == event.product.productId)
+            .first;
+        filteredProduct.bBMinQty = (filteredProduct.bBMinQty ?? 0) + 1;
+
+        await ProductStorage.instance.addUpdateProduct(filteredProduct);
+
+        add(GetLocalProductList());
+      }
+
+      /*emit(LocalProductListLoading());
 
       List<Product> tempList = [];
       await ProductStorageHive.instance.saveProduct(event.product);
@@ -76,7 +78,7 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
           .displayName;
 
       PopUpItems().toastfy("$pName successfully added!", Colors.green,
-          type: ToastificationType.success);
+          type: ToastificationType.success);*/
     } catch (e) {
       emit(const LocalProductListError(
           "Failed to fetch data. Is your device online?"));
@@ -86,7 +88,27 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
   FutureOr<void> _onSingleRemoveLocalProduct(
       RemoveSingleLocalProduct event, Emitter<LocalProductsState> emit) async {
     try {
-      emit(LocalProductListLoading());
+      List<Product> _localProductList =
+          await ProductStorage.instance.getAllProducts();
+      if (_localProductList
+          .where((element) => element.productId == event.product.productId)
+          .isNotEmpty) {
+        Product filteredProduct = _localProductList
+            .where((element) => element.productId == event.product.productId)
+            .first;
+
+        if (filteredProduct.bBMinQty == 1) {
+          await ProductStorage.instance
+              .deleteProduct(event.product.productId ?? "");
+        } else {
+          filteredProduct.bBMinQty = (filteredProduct.bBMinQty ?? 0) - 1;
+          await ProductStorage.instance.addUpdateProduct(filteredProduct);
+        }
+
+        add(GetLocalProductList());
+      }
+
+      /*emit(LocalProductListLoading());
 
       List<Product> list = await ProductStorageHive.instance.getAllProducts();
 
@@ -95,9 +117,9 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
       await ProductStorageHive.instance.deleteProduct(pID);
       list.removeWhere((Product prd) => prd.productId == pID);
       ProductList productList = ProductList();
-      productList.items?.products?.notc = list;
+      productList.items?.products?.product = list;
 
-      emit(LocalProductListLoaded(productList));
+      emit(LocalProductListLoaded(productList));*/
     } catch (e) {
       emit(const LocalProductListError(
           "Failed to fetch data. Is your device online?"));
@@ -109,9 +131,9 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
     try {
       emit(LocalProductListLoading());
 
-      await ProductStorageHive.instance.clearAllProducts();
+      await ProductStorage.instance.clearAllProducts();
       ProductList productList = ProductList();
-      productList.items?.products?.notc = [];
+      productList.items?.products?.product = [];
       emit(LocalProductListLoaded(productList));
     } catch (e) {
       emit(const LocalProductListError(

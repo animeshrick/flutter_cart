@@ -8,8 +8,9 @@ class LocalProductsState extends Equatable {
 }
 
 final class LocalProductsInitial extends LocalProductsState {
-  @override
-  List<Object> get props => [];
+  final ProductList? productModel;
+
+  LocalProductsInitial({this.productModel});
 }
 
 class LocalProductListLoading extends LocalProductsState {}

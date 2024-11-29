@@ -5,12 +5,12 @@ import 'package:flutter_cart/modules/product_list/local_product_bloc/local_produ
 import '../../../const/color_const.dart';
 import '../../../const/shadow_const.dart';
 import '../../../extension/hex_color.dart';
-import '../../../service/value_handler.dart';
 import '../../../utils/text_utils.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_text.dart';
 import '../../../widget/custom_ui.dart';
 import '../model/product.dart';
+import '../utils/product_list_utils.dart';
 
 class ProductCartAddEditToCartButton extends StatelessWidget {
   const ProductCartAddEditToCartButton({super.key, required this.product});
@@ -22,29 +22,22 @@ class ProductCartAddEditToCartButton extends StatelessWidget {
     return BlocBuilder<LocalProductsBloc, LocalProductsState>(
       builder: (context, state) {
         /// product filtered from product list
-        final productList = state.productModel.items?.products?.notc ?? [];
+        List<Product>? productList = state is LocalProductListLoaded
+            ? state.productModel.items?.products?.product
+            : [];
 
-        Product? cartProduct = Product();
-        /*ProductCartUtils().filterCartProduct(
-            allProductList: state.productList.value ?? [],
-            productId: product?.productId ?? "")*/
+        Product? _product = ProductListUtils().filterCartProduct(
+            allProductList: productList ?? [],
+            productId: product?.productId ?? "");
 
-        // AppLog.d(state.props, tag: "BLOC_State value");
-
-        return product?.bBIsOutOfStock == "Y" ||
-                !ValueHandler().isNonZeroNumericValue(product?.bBMRP)
+        return _product?.bBIsOutOfStock == "Y"
             ? CustomGOEButton(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 size: const Size(81, 36),
                 radius: 6,
                 borderColor: HexColor.fromHex(ColorConst.secondaryDark),
                 onPressed: () async {
-                  /*CommonResponse? commonResponse = await ProductRequestRepo()
-                      .submitServiceRequest(product: product);
-                  PopUpItems().toastMessage(
-                      commonResponse?.message ?? "Product Requested.",
-                      HexColor.fromHex(ColorConst.success600),
-                      durationSeconds: 3);*/
+                  /// TODO -- Service Request
                 },
                 child: Center(
                   child: CustomTextEnum(
@@ -52,7 +45,7 @@ class ProductCartAddEditToCartButton extends StatelessWidget {
                     color: HexColor.fromHex(ColorConst.secondaryDark),
                   ).textXS(),
                 ))
-            : (cartProduct.bBMinQty ?? 0) >= 1
+            : (_product?.bBMinQty ?? 0) >= 1
                 ? InkWell(
                     onTap: () {},
                     child: CustomContainer(
@@ -75,7 +68,7 @@ class ProductCartAddEditToCartButton extends StatelessWidget {
                               // color: HexColor.fromHex(ColorConst.brand600),
                               padding: const EdgeInsets.all(8),
                               icon: Icon(
-                                cartProduct.bBMinQty == 1
+                                (_product?.bBMinQty ?? 0) == 1
                                     ? Icons.delete_outline
                                     : Icons.minimize,
                                 color: HexColor.fromHex(ColorConst.success600),
@@ -86,7 +79,7 @@ class ProductCartAddEditToCartButton extends StatelessWidget {
                                         product: product ?? Product()));
                               }),
                           CustomTextEnum(
-                            "${cartProduct.bBMinQty}",
+                            "${_product?.bBMinQty}",
                             color: HexColor.fromHex(ColorConst.success600),
                           ).textSemiboldSM(),
                           CustomIconButton(
@@ -97,7 +90,11 @@ class ProductCartAddEditToCartButton extends StatelessWidget {
                                 Icons.add,
                                 color: HexColor.fromHex(ColorConst.success600),
                               ),
-                              onPressed: () {}),
+                              onPressed: () {
+                                context.read<LocalProductsBloc>().add(
+                                    AddSingleLocalProduct(
+                                        product: product ?? Product()));
+                              }),
                         ],
                       ),
                     ),

@@ -22,15 +22,15 @@ class Items {
 }
 
 class Products {
-  List<Product>? notc;
+  List<Product>? product;
 
-  Products({this.notc});
+  Products({this.product});
 
   Products.fromJson(Map<String, dynamic> json) {
     if (json['notc'] != null) {
-      notc = <Product>[];
+      product = <Product>[];
       json['notc'].forEach((v) {
-        notc!.add(Product.fromJson(v));
+        product!.add(Product.fromJson(v));
       });
     }
   }
@@ -40,7 +40,7 @@ class Product {
   // Salts? salts;
   // String? interactiveModule;
   // String? productName;
-  // String? mfgGroup;
+  String? mfgGroup;
   // String? bBExpiryDate;
   // int? isPurchased;
   // String? documentId;
@@ -74,7 +74,7 @@ class Product {
   // String? pKLotId;
   // String? primaryDisease;
   // String? keywords;
-  // int? bBDiscountPercent;
+  num? bBDiscountPercent;
   // String? offerImage;
   // int? bBHighDisc;
   String? productImage;
@@ -122,7 +122,7 @@ class Product {
     //   this.salts,
     // this.interactiveModule,
     // this.productName,
-    // this.mfgGroup,
+    this.mfgGroup,
     // this.bBExpiryDate,
     // this.isPurchased,
     // this.documentId,
@@ -156,7 +156,7 @@ class Product {
     // this.pKLotId,
     // this.primaryDisease,
     // this.keywords,
-    // this.bBDiscountPercent,
+    this.bBDiscountPercent,
     // this.offerImage,
     // this.bBHighDisc,
     this.productImage,
@@ -205,7 +205,7 @@ class Product {
     // salts = json['Salts'] != null ? Salts.fromJson(json['Salts']) : null;
     // interactiveModule = json['InteractiveModule'];
     // productName = json['ProductName'];
-    // mfgGroup = json['MfgGroup'];
+    mfgGroup = json['MfgGroup'];
     // bBExpiryDate = json['BBExpiryDate'];
     // isPurchased = json['IsPurchased'];
     // documentId = json['DocumentId'];
@@ -239,10 +239,11 @@ class Product {
     // pKLotId = json['PKLotId'];
     // primaryDisease = json['PrimaryDisease'];
     // keywords = json['Keywords'];
-    // bBDiscountPercent = json['BBDiscountPercent'];
+    bBDiscountPercent = ValueHandler().numify(json['BBDiscountPercent']);
     // offerImage = json['OfferImage'];
     // bBHighDisc = json['BBHighDisc'];
-    productImage = ValueHandler().stringify(json['ProductImage']);
+    productImage = ValueHandler().stringify(
+        "https://res.retailershakti.com/incom/images/product/thumb/${json['ProductImage']}");
     bBMRP = ValueHandler().numify(json['BBMRP']);
     // isNew = json['IsNew'];
     bBIsOutOfStock = ValueHandler().stringify(json['BBIsOutOfStock']);
@@ -293,6 +294,8 @@ class Product {
       'BBIsOutOfStock': bBIsOutOfStock,
       'BBMRP': bBMRP,
       'ProductImage': productImage,
+      'MfgGroup': mfgGroup,
+      'BBDiscountPercent': bBDiscountPercent,
     };
   }
 }

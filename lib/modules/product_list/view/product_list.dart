@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cart/const/divider_const.dart';
 import 'package:flutter_cart/extension/spacing.dart';
+import 'package:flutter_cart/widget/custom_ui.dart';
 
 import '../../../const/color_const.dart';
 import '../../../extension/hex_color.dart';
 import '../../../extension/logger_extension.dart';
 import '../../../service/value_handler.dart';
-import '../../../storage/product_sotrage/product_hive.dart';
-import '../../../utils/screen_utils.dart';
+import '../../../storage/product_sotrage/product_storage.dart';
 import '../../../utils/text_utils.dart';
 import '../../../widget/app_bar.dart';
 import '../../../widget/custom_button.dart';
@@ -31,7 +32,7 @@ class _ProductListState extends State<ProductList> {
   String count = "";
 
   Future<void> getCountUpdate() async {
-    List<Product> list = await ProductStorageHive.instance.getAllProducts();
+    List<Product> list = await ProductStorage.instance.getAllProducts();
     setState(() => count = list.length.toString());
 
     AppLog.d(list.map((product) => product.displayName).join(" & "),
@@ -68,7 +69,7 @@ class _ProductListState extends State<ProductList> {
                 title: "Products",
                 actions: [
                   Padding(
-                    padding: EdgeInsets.only(right: 17),
+                    padding: const EdgeInsets.only(right: 17),
                     child: Badge(
                         backgroundColor: HexColor.fromHex(ColorConst.error500),
                         label: CustomText(count),
@@ -78,7 +79,7 @@ class _ProductListState extends State<ProductList> {
                             onPressed: () async {
                               await getCountUpdate();
                             },
-                            icon: Icon(Icons.shopping_cart_outlined))),
+                            icon: const Icon(Icons.shopping_cart_outlined))),
                   ),
                 ],
               ),
@@ -89,66 +90,104 @@ class _ProductListState extends State<ProductList> {
                           prdList:
                               state.productModel.items?.products?.notc ?? [],
                         )*/
-                      ListView.builder(
+                      ListView.separated(
                           shrinkWrap: true,
-                          itemCount: state
-                                  .productModel.items?.products?.notc?.length ??
+                          itemCount: state.productModel.items?.products?.product
+                                  ?.length ??
                               0,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 15),
+                          /**/
+                          separatorBuilder: (_, __) =>
+                              CustomDivider().normalDivider(),
                           itemBuilder: (_, int index) {
                             Product? product = state
-                                .productModel.items?.products?.notc
+                                .productModel.items?.products?.product
                                 ?.elementAt(index);
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    CustomNetWorkImageView(
-                                      url:
-                                          "https://res.retailershakti.com/incom/images/product/thumb/${product?.productImage ?? " "}",
-                                      height: 48,
-                                      width: 48,
-                                    ),
-                                    15.pw,
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                            width: ScreenUtils.aw() * 0.4,
+                            return CustomContainer(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  4.ph,
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      CustomContainer(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(6)),
+                                        borderColor: HexColor.fromHex(
+                                            ColorConst.gray400),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 7),
+                                        child: CustomNetWorkImageView(
+                                          url: product?.productImage ?? "",
+                                          height: 48,
+                                          width: 48,
+                                        ),
+                                      ),
+                                      10.pw,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CustomTextEnum(
+                                                  product?.displayName ?? "",
+                                                  color: HexColor.fromHex(
+                                                      ColorConst.primaryDark))
+                                              .textXS(),
+                                          CustomTextEnum(
+                                                  product?.mfgGroup ?? "",
+                                                  color: HexColor.fromHex(
+                                                      ColorConst.gray500))
+                                              .textXS(),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          CustomTextEnum(
+                                                  "${TextUtils.rupee}${product?.offerPrice.toString() ?? ""}",
+                                                  color: HexColor.fromHex(
+                                                      ColorConst.primaryDark))
+                                              .textMediumSM(),
+                                          5.pw,
+                                          CustomTextEnum(
+                                                  "${TextUtils.rupee}${product?.bBMRP ?? ""}",
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  color: HexColor.fromHex(
+                                                      ColorConst.gray400))
+                                              .textXS(),
+                                          5.pw,
+                                          CustomContainer(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(2)),
+                                            color: HexColor.fromHex(
+                                                ColorConst.complimentary600),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 5, vertical: 2),
                                             child: CustomTextEnum(
-                                                    product?.displayName ?? "")
-                                                .textSM()),
-                                        5.ph,
-                                        CustomTextEnum(
-                                                "${TextUtils.rupee}${product?.offerPrice.toString() ?? " "}")
-                                            .textSemiboldSM(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                ProductCartAddEditToCartButton(
-                                    product: product),
-                                /*CustomGOEButton(
-                                    backGroundColor: Colors.green,
-                                    radius: 8,
-                                    child: const CustomText("Add",
-                                        color: Colors.white),
-                                    onPressed: () async {
-                                      PopUpItems().toastfy(
-                                          "${product?.displayName ?? ""} added successfully!",
-                                          HexColor.fromHex(
-                                              ColorConst.success200),
-                                          type: ToastificationType.success);
-                                      await ProductStorageHive.instance
-                                          .saveProduct(product ?? Product());
-
-                                        await getCountUpdate();
-
-                                    }),*/
-                              ],
+                                                    "${product?.bBDiscountPercent ?? ""}% Off",
+                                                    color: Colors.white)
+                                                .textMediumXS(),
+                                          ),
+                                        ],
+                                      ),
+                                      ProductCartAddEditToCartButton(
+                                          product: product),
+                                    ],
+                                  ),
+                                  4.ph,
+                                ],
+                              ),
                             );
                           })
                       : state is ProductListError
