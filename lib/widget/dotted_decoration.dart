@@ -9,13 +9,14 @@ class DottedDecoration extends Decoration {
   final BorderRadius? borderRadius;
   final List<int> dash;
   final double strokeWidth;
-   const DottedDecoration(
-      {this.shape= Shape.line,
-      this.linePosition= LinePosition.bottom,
-      this.color= const Color(0xFF9E9E9E),
+
+  const DottedDecoration(
+      {this.shape = Shape.line,
+      this.linePosition = LinePosition.bottom,
+      this.color = const Color(0xFF9E9E9E),
       this.borderRadius,
-      this.dash= const <int>[5, 5],
-      this.strokeWidth= 1});
+      this.dash = const <int>[5, 5],
+      this.strokeWidth = 1});
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
@@ -31,6 +32,7 @@ class _DottedDecotatorPainter extends BoxPainter {
   BorderRadius? borderRadius;
   List<int> dash;
   double strokeWidth;
+
   _DottedDecotatorPainter(this.shape, this.linePosition, this.color,
       this.borderRadius, this.dash, this.strokeWidth) {
     borderRadius = borderRadius ?? BorderRadius.circular(0);
@@ -101,4 +103,5 @@ class _DottedDecotatorPainter extends BoxPainter {
 }
 
 enum LinePosition { left, top, right, bottom }
+
 enum Shape { line, box, circle }

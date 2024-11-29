@@ -41,10 +41,12 @@ class Product {
   // String? interactiveModule;
   // String? productName;
   String? mfgGroup;
+
   // String? bBExpiryDate;
   // int? isPurchased;
   // String? documentId;
   String? productId;
+
   // int? groupSize;
   // String? refProductId;
   // int? displayFactor;
@@ -58,6 +60,7 @@ class Product {
   // String? encodeProdId;
   // int? dosageAlert;
   int? bBMinQty;
+
   // int? recentOrderCount;
   // int? isFeatured;
   // String? brand;
@@ -75,12 +78,15 @@ class Product {
   // String? primaryDisease;
   // String? keywords;
   num? bBDiscountPercent;
+
   // String? offerImage;
   // int? bBHighDisc;
   String? productImage;
   num? bBMRP;
+
   // int? isNew;
   String? bBIsOutOfStock;
+
   // String? interactiveSubModule;
   // double? bBOfferPrice;
   // int? pTRDiscType;
@@ -88,6 +94,7 @@ class Product {
   // String? hasOffer;
   // int? dosageRestriction;
   String? displayName;
+
   // String? prescriptionOTC;
   // int? offerCategoryId;
   // int? orderCount;
@@ -116,6 +123,7 @@ class Product {
   // int? isCustomizable;
   // String? highlightedTerms;
   num? offerPrice;
+
   // int? discountPercent;
 
   Product({

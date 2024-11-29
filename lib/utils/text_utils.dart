@@ -879,7 +879,8 @@ class TextUtils {
   static String enter_verification_code = "Enter Verification Code";
 
   // ignore: non_constant_identifier_names
-  static String verification_code_des = "We have sent an verification code on ##";
+  static String verification_code_des =
+      "We have sent an verification code on ##";
 
   // ignore: non_constant_identifier_names
   static String tests = "Tests";
@@ -1522,5 +1523,6 @@ class TextUtils {
 
   static String sendReport = "Send Report";
 
-  static String locationGenMsg = "Allow location access and turn on location to check service availability in your area.";
+  static String locationGenMsg =
+      "Allow location access and turn on location to check service availability in your area.";
 }

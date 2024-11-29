@@ -2,9 +2,13 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cart/const/color_const.dart';
+import 'package:flutter_cart/extension/hex_color.dart';
+import 'package:toastification/toastification.dart';
 
 import '../../../storage/product_sotrage/product_storage.dart';
-import '../model/product.dart';
+import '../../../utils/pop_up_items.dart';
+import '../../modules/product_list/model/product.dart';
 
 part 'local_products_event.dart';
 part 'local_products_state.dart';
@@ -62,23 +66,14 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
         add(GetLocalProductList());
       }
 
-      /*emit(LocalProductListLoading());
-
-      List<Product> tempList = [];
-      await ProductStorageHive.instance.saveProduct(event.product);
-      tempList.add(event.product);
-      ProductList productList = ProductList();
-      productList.items?.products?.notc = tempList;
-
-      emit(LocalProductListLoaded(productList));
-
-      String? pName = tempList
+      String? pName = _localProductList
           .firstWhere(
               (Product product) => product.productId == event.product.productId)
           .displayName;
 
-      PopUpItems().toastfy("$pName successfully added!", Colors.green,
-          type: ToastificationType.success);*/
+      PopUpItems().toastfy(
+          "$pName successfully added!", HexColor.fromHex(ColorConst.success50),
+          type: ToastificationType.success);
     } catch (e) {
       emit(const LocalProductListError(
           "Failed to fetch data. Is your device online?"));
@@ -108,18 +103,14 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
         add(GetLocalProductList());
       }
 
-      /*emit(LocalProductListLoading());
+      String? pName = _localProductList
+          .firstWhere(
+              (Product product) => product.productId == event.product.productId)
+          .displayName;
 
-      List<Product> list = await ProductStorageHive.instance.getAllProducts();
-
-      String pID =
-          ValueHandler().stringify(event.product.productId ?? "") ?? "";
-      await ProductStorageHive.instance.deleteProduct(pID);
-      list.removeWhere((Product prd) => prd.productId == pID);
-      ProductList productList = ProductList();
-      productList.items?.products?.product = list;
-
-      emit(LocalProductListLoaded(productList));*/
+      PopUpItems().toastfy("$pName successfully removed!",
+          HexColor.fromHex(ColorConst.complimentary50),
+          type: ToastificationType.info);
     } catch (e) {
       emit(const LocalProductListError(
           "Failed to fetch data. Is your device online?"));
@@ -135,6 +126,9 @@ class LocalProductsBloc extends Bloc<LocalProductsEvent, LocalProductsState> {
       ProductList productList = ProductList();
       productList.items?.products?.product = [];
       emit(LocalProductListLoaded(productList));
+      PopUpItems().toastfy(
+          "Cart cleared successfully!", HexColor.fromHex(ColorConst.error50),
+          type: ToastificationType.error);
     } catch (e) {
       emit(const LocalProductListError(
           "Failed to fetch data. Is your device online?"));

@@ -117,9 +117,9 @@ class AppLog {
   ///Print error logs
   static e(var message,
       {String tag = _DEFAULT_TAG_PREFIX,
-        Object? error,
-        StackTrace? stackTrace,
-        DateTime? time}) {
+      Object? error,
+      StackTrace? stackTrace,
+      DateTime? time}) {
     _log(_ERROR, tag, message.toString(),
         error: error, stackTrace: stackTrace, time: time);
   }

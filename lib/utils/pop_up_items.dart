@@ -211,15 +211,15 @@ class PopUpItems {
     ScaffoldMessenger.of(CurrentContext().context).showSnackBar(snackBar);
   }
 
-  void toastfy(String message, Color color, {int? durationSeconds,ToastificationType? type}) {
+  void toastfy(String message, Color color,
+      {int? durationSeconds, ToastificationType? type}) {
     toastification.show(
       context: CurrentContext().context,
       type: type,
       style: ToastificationStyle.flatColored,
-      autoCloseDuration: Duration(seconds: durationSeconds ?? 5),
-      title: CustomTextEnum(message,maxLines: 4).textXS(),
-      description: RichText(
-          text: const TextSpan(text: '')),
+      autoCloseDuration: Duration(seconds: durationSeconds ?? 2),
+      title: CustomTextEnum(message, maxLines: 4).textXS(),
+      description: RichText(text: const TextSpan(text: '')),
       alignment: Alignment.topRight,
       direction: TextDirection.ltr,
       animationDuration: const Duration(milliseconds: 300),
@@ -229,10 +229,13 @@ class PopUpItems {
           child: child,
         );
       },
-      icon: const Icon(Icons.check),
+      icon: type == ToastificationType.success
+          ? const Icon(Icons.check)
+          : type == ToastificationType.warning
+              ? const Icon(Icons.warning_amber)
+              : const Icon(Icons.account_tree_outlined),
       showIcon: true,
-      // show or hide the icon
-      primaryColor: Colors.green,
+      // primaryColor: Colors.green,
       backgroundColor: color,
       foregroundColor: Colors.black,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),

@@ -12,9 +12,13 @@ final class ProductListInitial extends ProductListState {}
 class ProductListLoading extends ProductListState {}
 
 class ProductListLoaded extends ProductListState {
-  final ProductList productModel;
+  final ProductList? productModel;
+  final int? productCount;
 
-  const ProductListLoaded(this.productModel);
+  const ProductListLoaded({this.productModel, this.productCount = 0});
+
+  @override
+  List<Object?> get props => [productModel, productCount];
 }
 
 class ProductListError extends ProductListState {

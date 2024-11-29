@@ -8,7 +8,6 @@ import '../data/connection/connection_status.dart';
 import '../extension/logger_extension.dart';
 import '../utils/screen_utils.dart';
 
-
 class AppConfig {
   Future<String> getAppVersion() async {
     if (kIsWeb && kDebugMode) {

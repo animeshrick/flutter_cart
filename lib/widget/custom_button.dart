@@ -245,7 +245,7 @@ class CustomGOEButton extends StatelessWidget {
     // Determine the effective background color and gradient when disabled
     final Color? effectiveBackgroundColor =
         onPressed == null && (backGroundColor != null || gradient != null)
-            ? HexColor.fromHex(ColorConst.gray100) // Disabled background color
+            ? HexColor.fromHex(ColorConst.gray200) // Disabled background color
             : backGroundColor;
     final Gradient? effectiveGradient = onPressed == null ? null : gradient;
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cart/modules/dashboard/view/dashboard.dart';
+import 'package:flutter_cart/modules/local_cart/view/local_cart_view.dart';
 import 'package:flutter_cart/modules/product_list/view/product_list.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,6 +37,13 @@ class RouterManager {
         path: RouteName.products,
         builder: (BuildContext context, GoRouterState state) {
           return ProductList();
+        },
+      ),
+      GoRoute(
+        name: RouteName.cart,
+        path: RouteName.cart,
+        builder: (BuildContext context, GoRouterState state) {
+          return LocalCartView();
         },
       ),
 

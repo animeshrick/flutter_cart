@@ -24,7 +24,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: CustomTextEnum(title).textSM(),
       backgroundColor:
-          backgroundColor ?? HexColor.fromHex(ColorConst.complimentary50),
+          backgroundColor ?? HexColor.fromHex(ColorConst.white),
       actions: actions,
       leading: leading,
       elevation: elevation,
@@ -32,6 +32,5 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

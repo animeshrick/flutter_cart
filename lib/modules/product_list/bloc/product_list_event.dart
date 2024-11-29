@@ -8,3 +8,8 @@ class GetProductList extends ProductListEvent {
   @override
   List<Object?> get props => [];
 }
+
+class GetProductCount extends ProductListEvent {
+  @override
+  List<Object?> get props => [];
+}

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cart/modules/product_list/local_product_bloc/local_products_bloc.dart';
 
 import '../../../const/color_const.dart';
 import '../../../const/shadow_const.dart';
 import '../../../extension/hex_color.dart';
+import '../../../storage/local_product_bloc/local_products_bloc.dart';
 import '../../../utils/text_utils.dart';
 import '../../../widget/custom_button.dart';
 import '../../../widget/custom_text.dart';
@@ -13,9 +13,11 @@ import '../model/product.dart';
 import '../utils/product_list_utils.dart';
 
 class ProductCartAddEditToCartButton extends StatelessWidget {
-  const ProductCartAddEditToCartButton({super.key, required this.product});
+  const ProductCartAddEditToCartButton(
+      {super.key, required this.product, this.isCart = false});
 
   final Product? product;
+  final bool isCart;
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +76,16 @@ class ProductCartAddEditToCartButton extends StatelessWidget {
                                 color: HexColor.fromHex(ColorConst.success600),
                               ),
                               onPressed: () {
-                                context.read<LocalProductsBloc>().add(
-                                    RemoveSingleLocalProduct(
-                                        product: product ?? Product()));
+                                if (isCart == true &&
+                                    (_product?.bBMinQty ?? 0) == 1) {
+                                  context
+                                      .read<LocalProductsBloc>()
+                                      .add(ClearAllLocalProduct());
+                                } else {
+                                  context.read<LocalProductsBloc>().add(
+                                      RemoveSingleLocalProduct(
+                                          product: product ?? Product()));
+                                }
                               }),
                           CustomTextEnum(
                             "${_product?.bBMinQty}",
